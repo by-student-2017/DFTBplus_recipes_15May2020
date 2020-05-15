@@ -44,7 +44,7 @@ Analysis = {
     EnergyRange [eV] = -6.5 -3.0
     EnergyStep [eV] = 0.01
     Region = {
-      Atoms = 1:136
+      Atoms = 1:135
     }
   }
 }

@@ -19,7 +19,7 @@ Transport {
       Id = "Drain"
       AtomRange = 144 191
       PLShiftTolerance = 0.0003
-      FermiLevel [eV] =  -4.665975 ${EF_drain}
+      FermiLevel [eV] =  -4.665975 #${EF_drain}
       Potential [eV] = -0.0 
     }
   

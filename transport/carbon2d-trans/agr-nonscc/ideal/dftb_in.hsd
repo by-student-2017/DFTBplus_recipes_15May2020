@@ -29,7 +29,7 @@ Hamiltonian = DFTB {
   }
   
   SlaterKosterFiles = Type2FileNames {
-    Prefix = ".\mio-1-1\"
+    Prefix = ".\..\mio-1-1\"
     Separator = "-"
     Suffix = ".skf"
   }
