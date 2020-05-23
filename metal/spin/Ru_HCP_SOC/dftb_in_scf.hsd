@@ -1,0 +1,94 @@
+Geometry = GenFormat {
+2  F
+ Ru
+     1    1    0.000000000         0.000000000         0.000000000
+     2    1    0.500000000         0.500000000         0.500000000
+        0.0000000000         0.0000000000         0.0000000000
+        2.8560000000         0.0000000000         0.0000000000
+        0.0000000000         2.8560000000         0.0000000000
+        0.0000000000         0.0000000000         2.8560000000
+}
+
+#Driver = {}
+Driver = ConjugateGradient {
+  LatticeOpt = Yes
+  MovedAtoms = 1:-1
+}
+
+Hamiltonian = DFTB {
+  SCC = Yes
+  SCCTolerance = 1.0E-8
+  MaxSCCIterations = 1000
+  Mixer = Broyden {}
+  MaxAngularMomentum = {
+    Ru = "d"
+  }
+  Charge = 0.0
+  SpinPolarisation = nonColinear { # each atom starts with a spin of 3z
+    InitialSpins = {
+      AllAtomSpins = {
+	    0.0 0.0 3.0
+	    0.0 0.0 3.0
+      }
+    }
+  }
+  SpinConstants {
+    Ru {
+      -0.00882 #Wdd
+    }
+  }
+  SpinOrbit = {
+    Dual = Yes
+    Ru [eV] = {0.0 0.0 0.058}
+  }
+  #OrbitalPotential = {
+  #  Functional = {FLL}
+  #  Ru = {
+  #    Shells = {4} # f shell
+  #    UJ = 0.25 # U/2
+  #  }
+  #  Ru = {
+  #    Shells = {3} # d shell
+  #    UJ = 0.125 # U/2
+  #  }
+  #}
+  #ElectricField = {
+  #  External = {
+  #    Direction = 0.0 0.0 1.0
+  #    Strength [v/m] = 1.0E9
+  #  }
+  #}
+  Filling = MethfesselPaxton {
+    Temperature [Kelvin] = 5.0e+2
+    Order = 2
+  }
+  SlaterKosterFiles = Type2FileNames {
+    Prefix = ".\SI\"
+    Separator = "-"
+    Suffix = ".skf"
+  }
+  KPointsAndWeights = SupercellFolding {
+   6 0 0
+   0 6 0
+   0 0 6
+   0.5 0.5 0.5
+  }
+}
+
+Options = {
+  WriteAutotestTag = Yes
+}
+
+Analysis = {
+  CalculateForces = Yes
+}
+
+ParserOptions = {
+  ParserVersion = 8
+}
+
+#Parallel {
+  # Allow OMP threads explicitely to test for hybrid parallelisation with
+  # MPI-binary. (Check the manual before using this in production runs!)
+#  UseOmpThreads = Yes
+#}
